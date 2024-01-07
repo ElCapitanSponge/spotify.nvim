@@ -13,11 +13,13 @@ local Spotify = {}
 Spotify.__index = Spotify
 
 function Spotify:new()
+    local config = Config:get_default()
+
     local spotify = setmetatable({
-        config = Config:new(),
-        data = Data:new(),
+        config = config,
+        data = Data.Data:new(),
         logger = Log,
-        ui = Ui:new()
+        ui = Ui:new(config.settings)
     }, self)
 
     return spotify
@@ -44,11 +46,13 @@ local spotify = Spotify:new()
 ---@return Spotify
 function Spotify.setup(self, partial_config)
     if self ~= spotify then
+        ---@diagnostic disable-next-line: cast-local-type
         partial_config = self
         self = spotify
     end
 
-    self.config = Config.merge_config(partial_config, self.config)
+    ---@diagnostic disable-next-line: param-type-mismatch
+    self.config = Config:merge(partial_config, self.config)
     self.ui:configure(self.config.settings)
 
     return self

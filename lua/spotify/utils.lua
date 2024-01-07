@@ -1,13 +1,13 @@
-local M = {}
+local Utils = {}
 
-function M.trim(str)
+function Utils.trim(str)
     return str:gsub("^%s+", ""):gsub("%s+$", "")
 end
-function M.remove_duplicate_whitespace(str)
+function Utils.remove_duplicate_whitespace(str)
     return str:gsub("%s+", " ")
 end
 
-function M.split(str, sep)
+function Utils.split(str, sep)
     if sep == nil then
         sep = "%s"
     end
@@ -18,8 +18,8 @@ function M.split(str, sep)
     return t
 end
 
-function M.is_white_space(str)
+function Utils.is_white_space(str)
     return str:gsub("%s", "") == ""
 end
 
-return M
+return Utils

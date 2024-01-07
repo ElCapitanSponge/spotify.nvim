@@ -8,6 +8,7 @@ local SpotifyLog = {}
 
 SpotifyLog.__index = SpotifyLog
 
+---@return SpotifyLog
 function SpotifyLog:new()
     local log = setmetatable({
         lines = {},
